@@ -132,14 +132,14 @@ class ALLSKYMODULE:
         if not self.installed:
             return True
         if self.installed_version and self.version:
-            if self.installed_version != '' and self.version != '':
+            if self.installed_version not in ('', 'Unknown') and self.version not in ('', 'Unknown'):
                 return version.parse(self.installed_version) < version.parse(self.version)
         return False
     
     @property
     def is_update_available(self):
         if self.installed_version and self.version:
-            if self.installed_version != '' and self.version != '':
+            if self.installed_version not in ('', 'Unknown') and self.version not in ('', 'Unknown'):
                 return version.parse(self.installed_version) < version.parse(self.version)
         return False
     
