@@ -335,7 +335,7 @@ class ALLSKYPUBLISHDATARETAIN(ALLSKYMODULEBASE):
 			"mqttRetain": {
 				"required": "false",
 				"description": "Retain message",
-				"help": "help": "If enabled, the broker retains the last message as a last known good value. New subscribers will instantly receive the last published message without waiting for the next update. Recommended when data is published infrequently.",
+				"help": "If enabled, the broker retains the last message as a last known good value. New subscribers will instantly receive the last published message without waiting for the next update. Recommended when data is published infrequently.",
 				"tab": "MQTT",
 				"type": {
 					"fieldtype": "checkbox"
@@ -908,7 +908,7 @@ class ALLSKYPUBLISHDATARETAIN(ALLSKYMODULEBASE):
 		return result
 
 
-def publishdataretain(params, event):
+def publishdata_retain(params, event):
 	allsky_publishdata_retain = ALLSKYPUBLISHDATARETAIN(params, event)
 	result = allsky_publishdata_retain.run()
 
