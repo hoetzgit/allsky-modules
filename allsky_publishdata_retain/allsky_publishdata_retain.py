@@ -38,6 +38,8 @@ class ALLSKYPUBLISHDATARETAIN(ALLSKYMODULEBASE):
 		"events": [
 			"day",
 			"night",
+            "nightday",
+            "daynight",
 			"periodic"
 		],
 		"experimental": "yes",
