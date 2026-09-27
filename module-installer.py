@@ -427,6 +427,15 @@ class ALLSKYMODULEINSTALLER:
         
         self.module_list = sorted(self.module_list, key=lambda p: p.name)
             
+    def _module_status(self, module):
+        # weiherhammer: status text for the (previously empty) description column,
+        # so the checklist shows what is installed and whether an update exists.
+        if not module.installed:
+            return ''
+        if module.is_update_available:
+            return f'installed {module.installed_version} -> {module.version}'
+        return f'installed {module.installed_version}'
+
     def _display_install_dialog(self, reinstall=False):
         module_list = []
         modules_to_install = None
@@ -434,11 +443,12 @@ class ALLSKYMODULEINSTALLER:
             
             if reinstall:
                 if module.installed:
-                    module_list.append((module.name, '',  ''))
+                    module_list.append((module.name, self._module_status(module),  ''))
             else:
-                module_list.append((module.name, '',  module.winstalled if module.is_new_version_available else ''))
+                module_list.append((module.name, self._module_status(module),  module.winstalled if module.is_new_version_available else ''))
         if len(module_list) > 0:                
-            w = Whiptail(title='Select Modules', backtitle='AllSky Module Manager', height=20, width=40)
+            # weiherhammer: width 40 -> 76 to make room for the status column
+            w = Whiptail(title='Select Modules', backtitle='AllSky Module Manager', height=20, width=76)
             modules_to_install = w.checklist('Select the Modules To Install', module_list)[0]
 
         return modules_to_install
